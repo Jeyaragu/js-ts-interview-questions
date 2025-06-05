@@ -1,5 +1,5 @@
 Reverse a string without using built-in reverse methods.
-Check if a string is a palindrome.
+Check if a string is a palindrome. - Done
 Find the factorial of a number using recursion.
 Write a function to flatten a nested array.
 Implement a debounce function.

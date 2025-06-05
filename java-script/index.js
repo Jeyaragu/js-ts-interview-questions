@@ -68,7 +68,7 @@ const countVowels = (str) => {
     }
     return count;
 };
-console.log("CountVowels", countVowels("A man, a plan, a canal, Panama"));
+// console.log("CountVowels", countVowels("A man, a plan, a canal, Panama"));
 
 // Captializing first letter from the string
 const capitalizeFirstLetter = (str) => {
@@ -79,7 +79,23 @@ const capitalizeFirstLetter = (str) => {
         .map((e) => (e ? `${e.slice(0, 1).toUpperCase()}${e.slice(1)}` : ""))
         .join(" ");
 };
-console.log(
-    "CaptializeFirstLetter",
-    capitalizeFirstLetter("on   the southwest")
-);
+// console.log(
+//     "CaptializeFirstLetter",
+//     capitalizeFirstLetter("on   the southwest")
+// );
+
+// Bigest number of an array
+const findBigestNumberOfArray = (arr) => {
+    return {
+        minValue: Math.min.apply(Math, arr),
+        maxValue: Math.max.apply(Math, arr)
+    }
+};
+console.log('FindBigestNumberResult', findBigestNumberOfArray([1, 4, 10, 7, 8, -1]));
+
+// Find Sum from number string
+const findSumOfAnNumber = (str) => {
+    // It will replace alphapets with empty
+    const filterNumber = str.replace(/[A-Za-z]/g, '');
+    return filterNumber.split("").map(Number).reduce((a, b) => a + b);
+}
