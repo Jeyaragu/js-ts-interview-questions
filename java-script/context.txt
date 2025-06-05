@@ -1,0 +1,20 @@
+Reverse a string without using built-in reverse methods.
+Check if a string is a palindrome.
+Find the factorial of a number using recursion.
+Write a function to flatten a nested array.
+Implement a debounce function.
+Write a function to check for anagrams.
+Implement a deep clone of an object.
+Find the first non-repeating character in a string.
+Implement a simple Promise.all polyfill.
+Implement a custom bind function.
+Write a function to get the nth Fibonacci number.
+Remove duplicates from an array.
+Implement a throttling function.
+Write a function to group an array of objects by a key.
+Convert a string to camelCase.
+Implement a memoization function.
+Find the intersection of two arrays.
+Write a function to determine if two rectangles overlap.
+Implement a basic event emitter.
+Write a function to serialize and deserialize a binary tree.
