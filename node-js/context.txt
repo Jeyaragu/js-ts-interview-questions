@@ -1,0 +1,2 @@
+1. Create a server using express and http module
+2. Sample program using event emitter
