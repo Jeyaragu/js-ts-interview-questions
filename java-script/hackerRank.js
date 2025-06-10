@@ -1,7 +1,6 @@
-
 const calculateSeatBooking = (totalRow, seatsPerRow, ticketRate) => {
     const totalSeats = totalRow * seatsPerRow;
-    let seatNumbers = []
+    let seatNumbers = [];
     let bookedSeats = [];
     let nonBookedSeats = [];
     // Finding total number of seats / odd seats
@@ -15,38 +14,62 @@ const calculateSeatBooking = (totalRow, seatsPerRow, ticketRate) => {
     }
     let seatAllocation = [];
     for (let k = 0; k < seatNumbers.length; k = k + seatsPerRow) {
-        seatAllocation.push(seatNumbers.slice(k, k + seatsPerRow))
+        seatAllocation.push(seatNumbers.slice(k, k + seatsPerRow));
     }
     let bookingOutLet = [];
     for (let m = 0; m < seatAllocation.length; m++) {
         let mockedSeats = [];
-        if (m % 2 == 0) { // Odd Seats
+        if (m % 2 == 0) {
+            // Odd Seats
             seatAllocation[m].forEach((seats) => {
                 if (seats % 2 == 0) {
-                    mockedSeats.push(seats)
+                    mockedSeats.push(seats);
                 } else {
                     // Booked seat masked
-                    mockedSeats.push('*')
+                    mockedSeats.push("*");
                 }
-            })
-        } else { // Even Seats
+            });
+        } else {
+            // Even Seats
             seatAllocation[m].forEach((seats) => {
                 if (seats % 2 == 0) {
                     // Booked seat masked
-                    mockedSeats.push('*')
+                    mockedSeats.push("*");
                 } else {
-                    mockedSeats.push(seats)
+                    mockedSeats.push(seats);
                 }
-            })
+            });
         }
-        bookingOutLet.push(mockedSeats)
+        bookingOutLet.push(mockedSeats);
     }
-    console.log('bookingOutLet', bookingOutLet)
+    console.log("bookingOutLet", bookingOutLet);
     return {
         totalSeats,
         bookedSeats: bookedSeats.length,
         nonBookedSeats: nonBookedSeats.length,
-    }
+    };
+};
+// console.log(calculateSeatBooking(4, 10, 100));
+
+// Sort the positive number and keeping the negative number in the same place
+const sortArry = (arr) => {
+    // Filter only numbers 
+    const convertToNumbers = arr
+        .filter((element) => !isNaN(Number(element)))
+        .map(Number);
+    // Sort the positive values    
+    const sortedValues = convertToNumbers
+        .filter((n) => Math.sign(n) !== -1).sort((a, b) => a - b);
+    const result = [];
+    arr.map((a, index) => {
+        if (Math.sign(a) == -1) result[index] = a;
+        sortedValues[index] ? result.push(sortedValues[index]) : ''
+    })
+    return {
+        arr,
+        sortedValues,
+        result
+    };
 };
 
-console.log(calculateSeatBooking(4, 10, 100));
+console.log(sortArry([3, 1, -1, 5, 2, 4, -3]))
