@@ -72,4 +72,32 @@ const sortArry = (arr) => {
     };
 };
 
-console.log(sortArry([3, 1, -1, 5, 2, 4, -3]))
+// console.log(sortArry([3, 1, -1, 5, 2, 4, -3]));
+
+const findInterSection = (x1, v1, x2, v2) => {
+    let initalValue_1 = v1;
+    let initalValue_2 = v2;
+    let velocity_1 = [v1];
+    let velocity_2 = [v2];
+    while ((velocity_1.length && velocity_2.length) < 10) {
+        initalValue_1 = initalValue_1 + v1;
+        initalValue_2 = initalValue_2 + v2;
+        velocity_1.push(initalValue_1);
+        velocity_2.push(initalValue_2);
+    }
+    const interSectionResult = velocity_1.map((element) => {
+        return velocity_2.includes(element)
+    });
+    return {
+        velocity_1,
+        velocity_2,
+        interSectionResult
+    }
+}
+console.log(findInterSection(0, 1, 4, 2))
+
+// Find the sum of the number
+const findSumOfNumber = (n) => {
+    return (n * (n + 1) / 2)
+}
+console.log(findSumOfNumber(10));
