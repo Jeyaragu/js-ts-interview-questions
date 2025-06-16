@@ -42,7 +42,7 @@ const calculateSeatBooking = (totalRow, seatsPerRow, ticketRate) => {
         }
         bookingOutLet.push(mockedSeats);
     }
-    console.log("bookingOutLet", bookingOutLet);
+    console.log('bookingOutLet', bookingOutLet)
     return {
         totalSeats,
         bookedSeats: bookedSeats.length,
@@ -53,51 +53,81 @@ const calculateSeatBooking = (totalRow, seatsPerRow, ticketRate) => {
 
 // Sort the positive number and keeping the negative number in the same place
 const sortArry = (arr) => {
-    // Filter only numbers 
+    // Filter only numbers
     const convertToNumbers = arr
         .filter((element) => !isNaN(Number(element)))
         .map(Number);
-    // Sort the positive values    
+    // Sort the positive values
     const sortedValues = convertToNumbers
-        .filter((n) => Math.sign(n) !== -1).sort((a, b) => a - b);
+        .filter((n) => Math.sign(n) !== -1)
+        .sort((a, b) => a - b);
     const result = [];
     arr.map((a, index) => {
         if (Math.sign(a) == -1) result[index] = a;
-        sortedValues[index] ? result.push(sortedValues[index]) : ''
-    })
+        sortedValues[index] ? result.push(sortedValues[index]) : "";
+    });
     return {
         arr,
         sortedValues,
-        result
+        result,
     };
 };
 
 // console.log(sortArry([3, 1, -1, 5, 2, 4, -3]));
 
+// Find intersection of kangaroo
+// x1 and x2 are the starting points of the kangaroo
+// v1 and v2 are the meter per jump of the kangaroo
 const findInterSection = (x1, v1, x2, v2) => {
-    let initalValue_1 = v1;
-    let initalValue_2 = v2;
-    let velocity_1 = [v1];
-    let velocity_2 = [v2];
-    while ((velocity_1.length && velocity_2.length) < 10) {
-        initalValue_1 = initalValue_1 + v1;
-        initalValue_2 = initalValue_2 + v2;
-        velocity_1.push(initalValue_1);
-        velocity_2.push(initalValue_2);
+    let jumpTime = 1;
+    let movePositions_1 = new Map();
+    let movePositions_2 = new Map();
+    movePositions_1.set(jumpTime, x1 + v1);
+    movePositions_2.set(jumpTime, x2 + v2);
+    let interSectionStatus = "NO";
+    while ((movePositions_1.size && movePositions_2.size) < 10000) {
+        let newJumpLocation = jumpTime + 1;
+        movePositions_1.set(
+            newJumpLocation,
+            Number(movePositions_1.get(jumpTime)) + v1
+        );
+        movePositions_2.set(
+            newJumpLocation,
+            Number(movePositions_2.get(jumpTime)) + v2
+        );
+        jumpTime += 1;
     }
-    const interSectionResult = velocity_1.map((element) => {
-        return velocity_2.includes(element)
-    });
-    return {
-        velocity_1,
-        velocity_2,
-        interSectionResult
+    for (const [key, value] of movePositions_1) {
+        let getJumpDistance = movePositions_2.get(key);
+        if (getJumpDistance == value) {
+            interSectionStatus = 'YES';
+            break;
+        }
     }
-}
-console.log(findInterSection(0, 1, 4, 2))
+    return interSectionStatus;
+};
+// console.log(findInterSection(0, 2, 4, 1));
+// console.log((findInterSection(0,3,4,2)))
+const kangaroo = (x1, v1, x2, v2) => {
+    if (v1 === v2) return x1 === x2 ? "YES" : "NO"
+    const n = (x2 - x1) / (v1 - v2);
+    return n > 0 && Number.isInteger(n) ? "YES" : "NO"
+};
+// console.log((kangaroo(0,3,4,2)))
 
 // Find the sum of the number
 const findSumOfNumber = (n) => {
-    return (n * (n + 1) / 2)
+    return (n * (n + 1)) / 2;
+};
+// console.log(findSumOfNumber(10));
+
+// Compare Triplets
+function compareTriplets(a, b) {
+    let alice = 0;
+    let bob = 0;
+    a.forEach((element, index) => {
+        element > b[index] ? alice += 1 : element < b[index] ? bob += 1 : '';
+    })
+    return [alice, bob]
 }
-console.log(findSumOfNumber(10));
+console.log(compareTriplets([17, 28, 30, 1], [99, 16, 8, 1]))
