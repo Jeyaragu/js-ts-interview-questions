@@ -134,14 +134,22 @@ console.log(compareTriplets([17, 28, 30, 1], [99, 16, 8, 1]));
 
 // Print the ratio of possitive, negative and zero
 const findRatio = (arr) => {
-    const positiveNumbers = arr.filter((element) => Math.sign(element) == 1);
-    const negativeNumbers = arr.filter((element) => Math.sign(element) == -1);
-    const zeroNumber = arr.filter((element) => Math.sign(element) === 0)
-    console.log(positiveNumbers, negativeNumbers, zeroNumber);
-    return {
-        positiveNumbers: positiveNumbers.length / arr.length,
-        negativeNumbers: negativeNumbers.length / arr.length,
-        zeroNumber: zeroNumber.length / arr.length
+    const arrLength = arr.length;
+    const counts = { positive: 0, negative: 0, zero: 0 };
+    for (const num of arr) {
+        const sign = Math.sign(num);
+        if (sign === 1) counts.positive++;
+        else if (sign === -1) counts.negative++;
+        else counts.zero++;
     }
+    const ratios = {
+        positiveNumbers: counts.positive / arrLength,
+        negativeNumbers: counts.negative / arrLength,
+        zeroNumber: counts.zero / arrLength
+    }
+    console.log(`Positive Ratio: ${ratios.positiveNumbers.toFixed(arrLength)}`)
+    console.log(`Negative Ratio: ${ratios.negativeNumbers.toFixed(arrLength)}`)
+    console.log(`Zero Ratio: ${ratios.zeroNumber.toFixed(arrLength)}`)
+    return ratios;
 };
-console.log(findRatio([1, 1, 0, -1, -2]))
+findRatio([1, 1, 0, -1, -2]);
