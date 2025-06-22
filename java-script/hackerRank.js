@@ -130,4 +130,18 @@ function compareTriplets(a, b) {
     })
     return [alice, bob]
 }
-console.log(compareTriplets([17, 28, 30, 1], [99, 16, 8, 1]))
+console.log(compareTriplets([17, 28, 30, 1], [99, 16, 8, 1]));
+
+// Print the ratio of possitive, negative and zero
+const findRatio = (arr) => {
+    const positiveNumbers = arr.filter((element) => Math.sign(element) == 1);
+    const negativeNumbers = arr.filter((element) => Math.sign(element) == -1);
+    const zeroNumber = arr.filter((element) => Math.sign(element) === 0)
+    console.log(positiveNumbers, negativeNumbers, zeroNumber);
+    return {
+        positiveNumbers: positiveNumbers.length / arr.length,
+        negativeNumbers: negativeNumbers.length / arr.length,
+        zeroNumber: zeroNumber.length / arr.length
+    }
+};
+console.log(findRatio([1, 1, 0, -1, -2]))
