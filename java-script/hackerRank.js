@@ -153,3 +153,19 @@ const findRatio = (arr) => {
     return ratios;
 };
 findRatio([1, 1, 0, -1, -2]);
+
+function staircase(n) {
+  let lader = '';
+  let hash = '#'
+   while(n >0) {
+     let space = n - 1;
+     lader += `\n${hash}`.padStart(space);
+     console.log(lader)
+     hash +='#'
+     n -= 1
+   }
+   return hash;
+}
+
+console.log('a'.padEnd(3) + 'b')
+// console.log('a','b')
