@@ -130,7 +130,7 @@ function compareTriplets(a, b) {
     })
     return [alice, bob]
 }
-console.log(compareTriplets([17, 28, 30, 1], [99, 16, 8, 1]));
+// console.log(compareTriplets([17, 28, 30, 1], [99, 16, 8, 1]));
 
 // Print the ratio of possitive, negative and zero
 const findRatio = (arr) => {
@@ -152,20 +152,18 @@ const findRatio = (arr) => {
     console.log(`Zero Ratio: ${ratios.zeroNumber.toFixed(arrLength)}`)
     return ratios;
 };
-findRatio([1, 1, 0, -1, -2]);
+// findRatio([1, 1, 0, -1, -2]);
 
 function staircase(n) {
-  let lader = '';
-  let hash = '#'
-   while(n >0) {
-     let space = n - 1;
-     lader += `\n${hash}`.padStart(space);
-     console.log(lader)
-     hash +='#'
-     n -= 1
-   }
-   return hash;
+    let size = n;
+    let lader = [];
+    let hash = '#'
+    while (size > 0) {
+        lader.push(`${hash}`.padStart(n));
+        console.log(`${hash}`.padStart(n))
+        hash += '#';
+        size -= 1;
+    }
+    return lader.join('\n');
 }
-
-console.log('a'.padEnd(3) + 'b')
-// console.log('a','b')
+console.log(staircase(6))
