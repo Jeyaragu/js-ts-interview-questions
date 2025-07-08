@@ -166,4 +166,36 @@ function staircase(n) {
     }
     return lader.join('\n');
 }
-console.log(staircase(6))
+// console.log(staircase(6));
+
+function minMaxValue(arr) {
+    arr = arr.sort((a, b) => a - b);
+    const minValue = arr.slice(0, arr.length - 1).reduce((a, b) => a + b);
+    const maxValue = arr.slice(1, arr.length).reduce((a, b) => a + b);
+    console.log(minValue, maxValue)
+};
+// minMaxValue([7, 69, 2, 221, 8974])
+
+// Find largest number count from array
+function birthdayCakeCandles(candles) {
+    const maxNumber = Math.max.apply(Math, candles);
+    return candles.filter((candle) => candle === maxNumber).length;
+};
+// birthdayCakeCandles([3, 2, 1, 3]);
+
+function timeConversion(s) {
+    let strSplit = s.split(':')
+    const result = strSplit.map((str, index) => {
+        let convertedTime = '';
+        if (index == 0) {
+            convertedTime = Number(str) + 12 == 24 ? '00:' : `${Number(str) + 12}:`
+        } else if (index == 1) {
+            convertedTime += `${str}:`
+        } else {
+            convertedTime += str.replace(/[A-Za-z]/g, '')
+        }
+        return convertedTime
+    })
+    return result.join('')
+};
+console.log(timeConversion('03:00:00AM'))
