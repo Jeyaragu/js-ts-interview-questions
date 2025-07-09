@@ -184,18 +184,20 @@ function birthdayCakeCandles(candles) {
 // birthdayCakeCandles([3, 2, 1, 3]);
 
 function timeConversion(s) {
-    let strSplit = s.split(':')
-    const result = strSplit.map((str, index) => {
-        let convertedTime = '';
-        if (index == 0) {
-            convertedTime = Number(str) + 12 == 24 ? '00:' : `${Number(str) + 12}:`
-        } else if (index == 1) {
-            convertedTime += `${str}:`
-        } else {
-            convertedTime += str.replace(/[A-Za-z]/g, '')
-        }
-        return convertedTime
-    })
-    return result.join('')
+    let [hour, minute, secondPeriod] = s.split(':');
+    let period = secondPeriod.slice(-2);  // Get 'AM' or 'PM'
+    let second = secondPeriod.slice(0, 2);  // Remove 'AM' or 'PM'
+
+    hour = parseInt(hour);
+
+    if (period === 'AM') {
+        if (hour === 12) hour = 0;
+    } else {
+        if (hour !== 12) hour += 12;
+    }
+    let hourStr = hour < 10 ? '0' + hour : hour.toString();
+    return `${hourStr}:${minute}:${second}`;
 };
-console.log(timeConversion('03:00:00AM'))
+// console.log(timeConversion('11:59:00PM'))
+// console.log(timeConversion('12:40:22AM'))
+// console.log(timeConversion('12:45:54PM'))
