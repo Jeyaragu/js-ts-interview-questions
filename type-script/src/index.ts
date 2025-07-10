@@ -1,34 +1,11 @@
-console.log('Try npm run lint/fix!');
-
-const longString =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer ut aliquet diam.';
-
-const trailing = 'Semicolon';
-
-const why = {am: 'I tabbed?'};
-
-const iWish = "I didn't have a trailing space...";
-
-const sicilian = true;
-
-const vizzini = sicilian ? !sicilian : sicilian;
-
-const re = /foo {3}bar/;
-
-export function doSomeStuff(
-  withThis: string,
-  andThat: string,
-  andThose: string[],
-) {
-  //function on one line
-  if (!andThose.length) {
-    return false;
-  }
-  console.log(withThis);
-  console.log(andThat);
-  console.dir(andThose);
-  console.log(longString, trailing, why, iWish, vizzini, re);
-  return;
-}
-// TODO: more examples
-
+// Logic Definition
+// If the difference between the  and the next multiple of  is less than , round  up to the next multiple of .
+// If the value of  is less than , no rounding occurs as the result will still be a failing grade.
+const gradingStudents = (grades: number[]): number[] => {
+  return grades.map((grade: number) => {
+    if (grade < 38) return grade;
+    const nextMultipleOf5 = Math.ceil(grade / 5) * 5;
+    return nextMultipleOf5 - grade < 3 ? nextMultipleOf5 : grade;
+  });
+};
+console.log(gradingStudents([73, 67, 38, 33, 55]));
