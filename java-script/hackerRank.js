@@ -201,3 +201,34 @@ function timeConversion(s) {
 // console.log(timeConversion('11:59:00PM'))
 // console.log(timeConversion('12:40:22AM'))
 // console.log(timeConversion('12:45:54PM'))
+
+
+const getTotalX = (a, b) => {
+    let multiplers = [];
+    // Finding multiplers
+    for (const index in a) {
+        let multiplerIndexer = [];
+        multiplerIndexer.push(a[index]);
+        while (multiplerIndexer.length < 100) {
+            const lastValue = multiplerIndexer.slice(-1)[0];
+            const result = lastValue + a[index];
+            multiplerIndexer.push(result);
+        }
+        multiplers.push(multiplerIndexer);
+    }
+    let divisors = []
+    // Finding divisors
+    for (const elements of b) {
+        let divisorIndexer = [];
+        let startDivisor = 1;
+        while (divisorIndexer.length < 100 && startDivisor <= elements) {
+            elements % startDivisor == 0 ? divisorIndexer.push(startDivisor) : '';
+            startDivisor++;
+        }
+        divisors.push(divisorIndexer);
+        startDivisor = 1;
+    }
+    return { multiplers, divisors };
+};
+
+console.log(getTotalX([2, 3], [16, 32, 96]))
