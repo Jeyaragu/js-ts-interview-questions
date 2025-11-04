@@ -216,7 +216,7 @@ const getTotalX = (a, b) => {
         }
         multiplers.push(multiplerIndexer);
     }
-    let divisors = []
+    let divisors = [];
     // Finding divisors
     for (const elements of b) {
         let divisorIndexer = [];
@@ -225,10 +225,59 @@ const getTotalX = (a, b) => {
             elements % startDivisor == 0 ? divisorIndexer.push(startDivisor) : '';
             startDivisor++;
         }
-        divisors.push(divisorIndexer);
+        divisors.push(divisorIndexer.reverse());
         startDivisor = 1;
     }
+    const arrayToCompareMultipler = multiplers[0]; // Taking first array
+    const remainingArrayToCompareMultipler = multiplers.slice(1); // Ommiting first array
+    let lcm = 0;
+    // Find LCM
+    for (const elementsToCompare of arrayToCompareMultipler) {
+        let compareValue = 0;
+        let previousIndexValue = false;
+        for (const elements in remainingArrayToCompareMultipler) {
+            const findElement = remainingArrayToCompareMultipler[elements].find((e) => e == elementsToCompare)
+            console.log(`Index: ${elements}`, elementsToCompare, findElement)
+            if (findElement) {
+                compareValue = elementsToCompare;
+                previousIndexValue = true;
+                console.log('coming to if block', compareValue);
+                break;
+            } else {
+                console.log('coming to else block')
+                previousIndexValue = false;
+            }
+        }
+        lcm = compareValue;
+        if (lcm > 0) break;
+    }
+    console.log('lcm', lcm)
     return { multiplers, divisors };
 };
+// console.log(getTotalX([2, 3, 4], [16, 32, 96]));
 
-console.log(getTotalX([2, 3], [16, 32, 96]))
+
+function breakingRecords(scores) {
+    // const minumScore = Math.min(...scores)
+    // const maximumScore = Math.max(...scores);
+    let defaultMinumScore = scores[0];
+    let defaultMaximumScore = scores[0];
+    let minumScoreCount = 0;
+    let maximumScoreCount = 0
+    let fromIndexOne = scores.slice(1)
+    for (const score of fromIndexOne) {
+        if (score < defaultMinumScore) {
+            defaultMinumScore =  score;
+            minumScoreCount++;
+        } 
+        if (score > defaultMaximumScore) {
+            defaultMaximumScore = score;
+            maximumScoreCount++;
+        }
+    }
+    console.log(maximumScoreCount, minumScoreCount)
+    return [maximumScoreCount, minumScoreCount];
+}
+
+// breakingRecords([3, 4, 21, 36, 10, 28, 35, 5, 24, 42])
+breakingRecords([10, 5, 20, 20, 4, 5, 2, 25, 1])

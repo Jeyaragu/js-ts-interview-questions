@@ -1,4 +1,5 @@
 var express = require('express');
+const url = require('url')
 var app = express();
 var port = 3000;
 
@@ -26,3 +27,16 @@ var http = require('http');
      console.log('Listening on port ' + port);
  }); 
 */
+
+const address = 'http://localhost:8080/default.htm?year=2024&month=october';
+const urlObject = url.parse(address, true); // The 'true' argument parses the query string into an object
+
+// console.log(urlObject.protocol); // Output: http:
+// console.log(urlObject.host);     // Output: localhost:8080
+// console.log(urlObject.hostname); // Output: localhost
+// console.log(urlObject.port);     // Output: 8080
+// console.log(urlObject.pathname); // Output: /default.htm
+// console.log(urlObject.search);   // Output: ?year=2024&month=october
+// console.log(urlObject.query);    // Output: { year: '2024', month: 'october' }
+const fromURL = 'https://google.in/a/b'
+console.log(url.resolve(fromURL,'/c/d'))
