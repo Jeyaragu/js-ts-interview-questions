@@ -267,9 +267,9 @@ function breakingRecords(scores) {
     let fromIndexOne = scores.slice(1)
     for (const score of fromIndexOne) {
         if (score < defaultMinumScore) {
-            defaultMinumScore =  score;
+            defaultMinumScore = score;
             minumScoreCount++;
-        } 
+        }
         if (score > defaultMaximumScore) {
             defaultMaximumScore = score;
             maximumScoreCount++;
@@ -280,4 +280,22 @@ function breakingRecords(scores) {
 }
 
 // breakingRecords([3, 4, 21, 36, 10, 28, 35, 5, 24, 42])
-breakingRecords([10, 5, 20, 20, 4, 5, 2, 25, 1])
+// breakingRecords([10, 5, 20, 20, 4, 5, 2, 25, 1]);
+
+function minimumNumber(n, password) {
+    // Return the minimum number of characters to make the password strong
+    const numbers = "0123456789";
+    const lower_case = "abcdefghijklmnopqrstuvwxyz";
+    const upper_case = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const special_characters = "!@#$%^&*()-+";
+    let minimumNumber = 0;
+    n < 6 ? minimumNumber++ : "";
+    !password.match(/[A-Z]/g) ? minimumNumber++ : "";
+    !password.match(/[a-z]/g) ? minimumNumber++ : "";
+    !password.match(/[!@#/$%/^&/*()\-/+]/g) ? minimumNumber++ : "";
+    !password.match(/[0-9]/g) ? minimumNumber++ : "";
+    minimumNumber + n < 6 ? minimumNumber++ : ""; // Calculating number of digits after the found missing conditions and it should be greater that 6 
+    return minimumNumber;
+};
+// console.log(minimumNumber(5, '$1234'));
+console.log(minimumNumber(5, '^e!zA'));
