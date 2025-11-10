@@ -284,17 +284,14 @@ function breakingRecords(scores) {
 
 function minimumNumber(n, password) {
     // Return the minimum number of characters to make the password strong
-    const numbers = "0123456789";
-    const lower_case = "abcdefghijklmnopqrstuvwxyz";
-    const upper_case = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const special_characters = "!@#$%^&*()-+";
     let minimumNumber = 0;
-    n < 6 ? minimumNumber++ : "";
     !password.match(/[A-Z]/g) ? minimumNumber++ : "";
     !password.match(/[a-z]/g) ? minimumNumber++ : "";
     !password.match(/[!@#/$%/^&/*()\-/+]/g) ? minimumNumber++ : "";
     !password.match(/[0-9]/g) ? minimumNumber++ : "";
-    minimumNumber + n < 6 ? minimumNumber++ : ""; // Calculating number of digits after the found missing conditions and it should be greater that 6 
+    // Calculating number of digits after the found missing conditions and it should be greater that 6 
+    minimumNumber + n < 6 ? minimumNumber++ : "";
+    minimumNumber + n < 6 ? minimumNumber++ : "";
     return minimumNumber;
 };
 // console.log(minimumNumber(5, '$1234'));
