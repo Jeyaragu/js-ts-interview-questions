@@ -347,5 +347,19 @@ function alternate(s) {
 function funnyString(s) {
     // Finding uni code of all the characters
     const strUniCode = s.split("").map((char, index) => s.charCodeAt(index));
-    return strUniCode;
-}
+    const differenceFn = strUniCode.map((element, index) => {
+        if (strUniCode[index + 1]) {
+            return strUniCode[index + 1] - element;
+        }
+    });
+    // strUniCode.reduce((accumlator, initialValue, ) => {
+    //     console.log('initialValue', initialValue, accumlator)
+    //     accumlator.push(initialValue - accumlator)
+    //     return accumlator;
+    // }, []);
+    return {
+        strUniCode,
+        differenceFn
+    };
+};
+console.log(funnyString('acxz'))
