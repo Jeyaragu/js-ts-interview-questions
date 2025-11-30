@@ -295,4 +295,41 @@ function minimumNumber(n, password) {
     return minimumNumber;
 };
 // console.log(minimumNumber(5, '$1234'));
-console.log(minimumNumber(5, '^e!zA'));
+// console.log(minimumNumber(5, '^e!zA'));
+function checkValidString(s, firstChar, secondChar) {
+    //beabeefeab
+    let previousChar = '';
+    let count = 0;
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] === firstChar || s[i] === secondChar) {
+            if (s[i] !== previousChar) {
+                count++;
+                previousChar = s[i];
+            } else {
+                return 0;
+            }
+        }
+    }
+    return count;
+}
+function alternate(str) {
+    // Write your code here
+    // return Array.from(new Set(str));
+    let uniqueCharacters = new Set(str);
+    let maxLength = 0;
+
+    let uniqueCharsArr = [...uniqueCharacters];
+    console.log('uniqueCharsArr', uniqueCharsArr)
+    for (let i = 0; i < uniqueCharsArr.length; i++) {
+        for (let j = i + 1; j < uniqueCharsArr.length; j++) {
+            let firstChar = uniqueCharsArr[i];
+            let secondChar = uniqueCharsArr[j];
+            let validLength = checkValidString(str, firstChar, secondChar);
+            console.log('validLength', firstChar, secondChar, validLength)
+            maxLength = Math.max(maxLength, validLength);
+        }
+    }
+
+    return maxLength;
+};
+console.log(alternate('beabeefeab'))
