@@ -99,3 +99,23 @@ const findSumOfAnNumber = (str) => {
     const filterNumber = str.replace(/[A-Za-z]/g, '');
     return filterNumber.split("").map(Number).reduce((a, b) => a + b);
 }
+
+function sortNonNegativeNumbers(arr) {
+    let sortResult = [];
+    let nonNegativeNumber = [];
+    for (const v of arr) {
+        if (Math.sign(v) == -1) {
+            if (nonNegativeNumber.length > 0) {
+                const sortArry = nonNegativeNumber.sort((a, b) => a - b);
+                nonNegativeNumber = [];
+                sortResult = [...sortResult, ...sortArry];
+                sortResult.push(v);
+            } else {
+                sortResult.push(v);
+            }
+        } else {
+            nonNegativeNumber.push(v)
+        }
+    }
+    return nonNegativeNumber.length == 0 ? sortResult : nonNegativeNumber.sort((a, b) => a - b);
+};

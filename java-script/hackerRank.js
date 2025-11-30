@@ -311,25 +311,41 @@ function checkValidString(s, firstChar, secondChar) {
         }
     }
     return count;
-}
-function alternate(str) {
-    // Write your code here
-    // return Array.from(new Set(str));
-    let uniqueCharacters = new Set(str);
-    let maxLength = 0;
+};
 
-    let uniqueCharsArr = [...uniqueCharacters];
-    console.log('uniqueCharsArr', uniqueCharsArr)
-    for (let i = 0; i < uniqueCharsArr.length; i++) {
-        for (let j = i + 1; j < uniqueCharsArr.length; j++) {
-            let firstChar = uniqueCharsArr[i];
-            let secondChar = uniqueCharsArr[j];
-            let validLength = checkValidString(str, firstChar, secondChar);
-            console.log('validLength', firstChar, secondChar, validLength)
-            maxLength = Math.max(maxLength, validLength);
+function alternate(s) {
+    // Write your code here
+    let distinctPair = [];
+    const distinctChar = Array.from(new Set(s));
+    let alternateStrMap = new Map();
+    for (let i = 0; i < distinctChar.length; i = i + 1) {
+        let j = i;
+        while (j < distinctChar.length) {
+            distinctChar[j + 1] ? distinctPair.push([distinctChar[i], distinctChar[j + 1]]) : "";
+            j++;
         }
     }
-
-    return maxLength;
+    for (const pair of distinctPair) {
+        for (let l = 0; l < pair.length; l = l + 2) {
+            const splitOriginalStr = s.split('').filter((e) => e == pair[l] || e == pair[l + 1]);
+            for (const index in splitOriginalStr) {
+                if (splitOriginalStr[index - 1]) {
+                    if (splitOriginalStr[index] == splitOriginalStr[index - 1]) {
+                        alternateStrMap.set(splitOriginalStr.join(""), 0);
+                        break
+                    } else {
+                        alternateStrMap.set(splitOriginalStr.join(""), splitOriginalStr.length)
+                    }
+                }
+            }
+        }
+    }
+    return distinctPair.length > 0 ? Math.max.apply(this, Array.from(alternateStrMap.values())) : 0;
 };
-console.log(alternate('beabeefeab'))
+// console.log(alternate('beabeefeab'));
+
+function funnyString(s) {
+    // Finding uni code of all the characters
+    const strUniCode = s.split("").map((char, index) => s.charCodeAt(index));
+    return strUniCode;
+}
