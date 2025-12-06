@@ -394,4 +394,55 @@ function hackerrankInString(s) {
   }
   return isValidString;
 }
-console.log(hackerrankInString("hereiamstackerrank"));
+// console.log(hackerrankInString("hereiamstackerrank"));
+
+function caesarCipher(s, k) {
+  // Generating Alphabets
+  const alphaCharCode = Array.from(Array(26)).map((item, index) => index + 65);
+  const alphabet = alphaCharCode.map((item, index) =>
+    String.fromCharCode(item).toLocaleLowerCase()
+  );
+  // If k is greater that 26 we have find the module value for rotoate the alphabet
+  k > alphabet.length ? (k = k % alphabet.length) : k;
+  const encryptedAlphabets = [...alphabet.slice(k), ...alphabet.slice(0, k)];
+  let encryResult = [];
+  for (const char of s) {
+    const isSplChra = char.match(/[!``@#/$%/^&/?*().\-_/+0-9<>\[\]{}]/g);
+    if (!isSplChra) {
+      const getIndex = alphabet.indexOf(char);
+      getIndex >= 0
+        ? encryResult.push(encryptedAlphabets[getIndex])
+        : encryResult.push(
+            encryptedAlphabets[
+              alphabet.indexOf(char.toLowerCase())
+            ].toUpperCase()
+          );
+    } else {
+      encryResult.push(char);
+    }
+  }
+  return encryResult.join("");
+}
+// console.log(caesarCipher("www.abc.xy", 87));
+// console.log(caesarCipher("1X7T4VrCs23k4vv08D6yQ3S19G4rVP188M9ahuxB6j1tMGZs1m10ey7eUj62WV2exLT4C83zl7Q80M", 27));
+// console.log(caesarCipher("159357lcfd!", 98));
+// console.log(caesarCipher("!m-rB`-oN!.W`cLAcVbN/CqSoolII!SImji.!w/`Xu`uZa1TWPRq`uRBtok`xPT`lL-zPTc.BSRIhu..-!.!tcl!-U", 62));
+// console.log(caesarCipher("DNFjxo?b5h*5<LWbgs6?V5{3M].1hG)pv1VWq4(!][DZ3G)riSJ.CmUj9]7Gzl?VyeJ2dIPEW4GYW*scT8(vhu9wCr]q!7eyaoy.", 45));
+
+function marsExploration(s) {
+  // Write your code here
+  const msgLength = Math.round(s.length / 3);
+  console.log("msgLength", s.length, msgLength);
+  let convertSos = [];
+  let startIndex = 0;
+  let toIndex = 3;
+  let invalidMsgCount = 0;
+  while (convertSos.length < msgLength) {
+    convertSos.push(s.slice(startIndex, toIndex));
+    startIndex += 3;
+    toIndex += 3;
+  }
+  console.log("convertSos-", convertSos);
+  return invalidMsgCount;
+}
+console.log(marsExploration("SOSOOSOSOSOSOSSOSOSOSOSOSOS"));
