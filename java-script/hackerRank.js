@@ -430,19 +430,85 @@ function caesarCipher(s, k) {
 // console.log(caesarCipher("DNFjxo?b5h*5<LWbgs6?V5{3M].1hG)pv1VWq4(!][DZ3G)riSJ.CmUj9]7Gzl?VyeJ2dIPEW4GYW*scT8(vhu9wCr]q!7eyaoy.", 45));
 
 function marsExploration(s) {
-  // Write your code here
-  const msgLength = Math.round(s.length / 3);
-  console.log("msgLength", s.length, msgLength);
   let convertSos = [];
   let startIndex = 0;
-  let toIndex = 3;
+  let toIndex = 3; // SOS message length is 3 so keep the toIndex as 3
   let invalidMsgCount = 0;
-  while (convertSos.length < msgLength) {
-    convertSos.push(s.slice(startIndex, toIndex));
+  while (convertSos.length < Math.round(s.length / 3)) {
+    const generateSosMsg = s.slice(startIndex, toIndex);
+    convertSos.push(generateSosMsg);
     startIndex += 3;
     toIndex += 3;
   }
   console.log("convertSos-", convertSos);
   return invalidMsgCount;
 }
-console.log(marsExploration("SOSOOSOSOSOSOSSOSOSOSOSOSOS"));
+// console.log(marsExploration("SOSOOSOSOSOSOSSOSOSOSOSOSOS"));
+
+function gemstones(arr) {
+  let gemStroneCount = 0;
+  // Taking first item from array to compare gems with other items
+  const firstItem = new Set(arr[0]);
+  let gemMap = new Map();
+  for (const element of firstItem) {
+    let gemStatus = [];
+    for (let i = 1; i < arr.length; i++) {
+      const checkGemStrone = arr[i].includes(element); // Checking whether the element available or not
+      gemStatus.push(checkGemStrone);
+    }
+    gemMap.set(element, gemStatus);
+    gemStatus = []; // Making this variable to empty for next iteration
+  }
+  for (const [, value] of gemMap) {
+    const findGemStoneCount = value.every((e) => e === true);
+    findGemStoneCount ? (gemStroneCount += 1) : "";
+  }
+  return gemStroneCount;
+}
+
+// console.log(gemstones(["abcdde", "baccd", "eeabg"]));
+
+function palindromeIndex(s) {
+  let startIndex = 0;
+  let endIndex = s.length - 1;
+  while (startIndex < endIndex) {
+    if (s[startIndex] !== s[endIndex]) {
+      // Check by startIndex
+      let i = startIndex + 1;
+      let j = endIndex;
+      let isPal = true;
+      while (i < j) {
+        if (s[i] !== s[j]) {
+          isPal = false;
+          break;
+        } else {
+          i += 1;
+          j -= 1;
+        }
+      }
+      if (isPal) return startIndex;
+      // Check for End Index
+      i = startIndex;
+      j = endIndex - 1;
+      isPal = true;
+      while (i < j) {
+        if (s[i] !== s[j]) {
+          isPal = false;
+          break;
+        } else {
+          i += 1;
+          j -= 1;
+        }
+      }
+      if (isPal) return endIndex;
+      return -1;
+    } else {
+      startIndex += 1;
+      endIndex -= 1;
+    }
+  }
+  return -1;
+}
+// console.log(
+//   palindromeIndex("hgygsvlfcwnswtuhmyaljkqlqjjqlqkjlaymhutwsnwcwflvsgygh")
+// );
