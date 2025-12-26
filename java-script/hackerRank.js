@@ -512,3 +512,36 @@ function palindromeIndex(s) {
 // console.log(
 //   palindromeIndex("hgygsvlfcwnswtuhmyaljkqlqjjqlqkjlaymhutwsnwcwflvsgygh")
 // );
+function superReducedString(s) {
+  let strToReduce = true;
+  let strReduced = s;
+  while (strToReduce) {
+    // Finding two identical sequence of characters using regEx
+    let repeatedSequences = strReduced.split("").join("").match(/(.)\1/g);
+    if (repeatedSequences?.length > 0) {
+      for (const identical of repeatedSequences) {
+        strReduced = strReduced.replaceAll(identical, "");
+      }
+    } else {
+      strToReduce = false;
+    }
+  }
+  return strReduced.length > 0 ? strReduced : "Empty String";
+}
+
+// console.log(
+//   superReducedString(
+//     "acdqglrfkqyuqfjkxyqvnrtysfrzrmzlygfveulqfpdbhlqdqrrqdqlhbdpfqluevfgylzmrzrfsytrnvqyxkjfquyqkfrlacdqj"
+//   )
+// );
+
+function alternatingCharacters(s) {
+  let removedCount = 0;
+  for (let i = 0; i < s.length; i++) {
+    if (s[i] === s[i + 1]) {
+      removedCount += 1;
+    }
+  }
+  return removedCount;
+}
+// console.log(alternatingCharacters("BABABA"));
