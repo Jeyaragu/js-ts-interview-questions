@@ -545,3 +545,30 @@ function alternatingCharacters(s) {
   return removedCount;
 }
 // console.log(alternatingCharacters("BABABA"));
+
+function theLoveLetterMystery(s) {
+  const strReverse = s.split("").reverse().join("");
+  let reductionSet = new Set();
+  let leftPointer = 0;
+  let isPolindrom = false;
+  if (s !== strReverse) {
+    while (!isPolindrom) {
+      if (s[i] !== "a" && s[i] !== "b") {
+        leftPointer += 1;
+      } else {
+        leftPointer += 1;
+      }
+      const getCharCode = s[leftPointer];
+    }
+    // for (let i = 0; i < s.length; i++) {
+    //   // Ignoring a and b because previous values wont be available after reduction of one element
+    //   if (s[i] !== "a" && s[i] !== "b") {
+    //     console.log(s[i], s[i].charCodeAt(0));
+    //   }
+    // }
+    console.log(s);
+  } else {
+    return 0;
+  }
+}
+console.log(theLoveLetterMystery("acde"));
