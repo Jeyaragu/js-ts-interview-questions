@@ -89,11 +89,11 @@ const findInterSection = (x1, v1, x2, v2) => {
     let newJumpLocation = jumpTime + 1;
     movePositions_1.set(
       newJumpLocation,
-      Number(movePositions_1.get(jumpTime)) + v1
+      Number(movePositions_1.get(jumpTime)) + v1,
     );
     movePositions_2.set(
       newJumpLocation,
-      Number(movePositions_2.get(jumpTime)) + v2
+      Number(movePositions_2.get(jumpTime)) + v2,
     );
     jumpTime += 1;
   }
@@ -236,7 +236,7 @@ const getTotalX = (a, b) => {
     let previousIndexValue = false;
     for (const elements in remainingArrayToCompareMultipler) {
       const findElement = remainingArrayToCompareMultipler[elements].find(
-        (e) => e == elementsToCompare
+        (e) => e == elementsToCompare,
       );
       console.log(`Index: ${elements}`, elementsToCompare, findElement);
       if (findElement) {
@@ -340,7 +340,7 @@ function alternate(s) {
           } else {
             alternateStrMap.set(
               splitOriginalStr.join(""),
-              splitOriginalStr.length
+              splitOriginalStr.length,
             );
           }
         }
@@ -400,7 +400,7 @@ function caesarCipher(s, k) {
   // Generating Alphabets
   const alphaCharCode = Array.from(Array(26)).map((item, index) => index + 65);
   const alphabet = alphaCharCode.map((item, index) =>
-    String.fromCharCode(item).toLocaleLowerCase()
+    String.fromCharCode(item).toLocaleLowerCase(),
   );
   // If k is greater that 26 we have find the module value for rotoate the alphabet
   k > alphabet.length ? (k = k % alphabet.length) : k;
@@ -415,7 +415,7 @@ function caesarCipher(s, k) {
         : encryResult.push(
             encryptedAlphabets[
               alphabet.indexOf(char.toLowerCase())
-            ].toUpperCase()
+            ].toUpperCase(),
           );
     } else {
       encryResult.push(char);
@@ -571,4 +571,45 @@ function theLoveLetterMystery(s) {
     return 0;
   }
 }
-console.log(theLoveLetterMystery("acde"));
+// console.log(theLoveLetterMystery("acde"));
+
+function anagram(s) {
+  if (s.length % 2) {
+    return -1;
+  } else {
+    const subStr1 = s.substring(0, s.length / 2);
+    const subStr2 = s.substring(s.length / 2);
+    console.log("--subStr", subStr1, subStr2, s.length, subStr1.length);
+    let strMap1 = new Map();
+    let strMap2 = new Map();
+    for (const s1 of subStr1) {
+      strMap1.set(s1, (strMap1.get(s1) || 0) + 1);
+    }
+    for (const s2 of subStr2) {
+      strMap2.set(s2, (strMap2.get(s2) || 0) + 1);
+    }
+    let count = 0;
+    for (const [key, value] of strMap1) {
+      if (strMap2.has(key)) {
+        const getStr2Val = strMap2.get(key);
+        const findDiff = Math.abs(
+          Math.min(value - getStr2Val, getStr2Val - value),
+        );
+        // count !== findDiff ? (count += findDiff) : "";
+        count += findDiff;
+        console.log("Available", key, value, getStr2Val, findDiff);
+      } else {
+        count += strMap1.get(key);
+        console.log("NotAvailable", key, strMap1.get(key));
+      }
+      console.log("count", count);
+    }
+    // console.log({ strMap1, strMap2 });
+    return count;
+  }
+}
+
+// console.log(anagram("aaabbb"));
+// console.log(anagram("ab"));
+console.log(anagram("hhpddlnnsjfoyxpciioigvjqzfbpllssuj"));
+// console.log(anagram("xaxbbbxx"));
