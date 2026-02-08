@@ -1,10 +1,14 @@
 {
   "devDependencies": {
+    "@types/node": "^22.7.5",
     "gts": "^6.0.2",
-    "typescript": "^5.8.3",
-    "@types/node": "^22.7.5"
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.8.3"
   },
   "scripts": {
+    "start": "node dist/index.js",
+    "start:dev": "nodemon --exec ts-node -r tsconfig-paths/register src/index.ts",
     "lint": "gts lint",
     "clean": "gts clean",
     "compile": "tsc",

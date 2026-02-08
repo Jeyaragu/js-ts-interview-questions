@@ -41,3 +41,30 @@ const countApplesAndOranges = (
 
 // countApplesAndOranges(7, 10, 4, 12, [2, 3, -4], [3, -2, -4]);
 // countApplesAndOranges(7, 11, 5, 15, [-2, 2, 1], [5, -6]);
+
+function twoSum(nums: number[], target: number): number[] {
+  // for (let i = 0; i < numsSize; i++) {
+  //   for (let j = i + 1; j < numsSize; j++) {
+  //     if (nums[i] + nums[j] === target) {
+  //       indicies.push(i, j);
+  //       break;
+  //     }
+  //   }
+  // }
+  let elementMap = new Map();
+  let indicies: number[] = [];
+  for (let i = 0; i < nums.length; i++) {
+    let currentElement = nums[i];
+    // actual formula currentElement + x = target;
+    // Here i am trying in the reverse way finding the x and checking whether the x is availble in the array or not
+    let x = target - currentElement;
+    if (elementMap.has(x)) {
+      indicies.push(elementMap.get(x), i);
+      break;
+    } else {
+      elementMap.set(currentElement, i);
+    }
+  }
+  return indicies;
+}
+console.log(twoSum([2, 7, 11, 15], 9));
