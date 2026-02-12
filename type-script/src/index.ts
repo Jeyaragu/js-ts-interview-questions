@@ -67,4 +67,25 @@ function twoSum(nums: number[], target: number): number[] {
   }
   return indicies;
 }
-console.log(twoSum([2, 7, 11, 15], 9));
+// console.log(twoSum([2, 7, 11, 15], 9));
+
+// Longest Balanced Subarray I
+function longestBalanced(nums: number[]): number {
+  let index: number = 0;
+  let oddNumbers = new Set();
+  let evenNumbers = new Set();
+  while (index < nums.length) {
+    const findReminder = nums[index] % 2;
+    // Finding odd and even numbers
+    if (findReminder === 0) {
+      oddNumbers.add(nums[index])
+    } else {
+      evenNumbers.add(nums[index])
+    }
+    index += 1;
+  }
+  console.log(oddNumbers, evenNumbers)
+  return 0
+}
+
+// console.log(longestBalanced([6,2]));
