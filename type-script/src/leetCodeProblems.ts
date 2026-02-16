@@ -32,7 +32,7 @@ function isSubsequence(s: string, t: string): boolean {
 function maxArea(height: number[]): number {
   let leftPointer = 0;
   let rightPointer = height.length - 1;
-  let preValu = height[0]
+  let preValu = height[0];
   while (leftPointer < rightPointer) {
     if (height[leftPointer] === height[rightPointer]) {
       leftPointer += 1;
@@ -45,3 +45,25 @@ function maxArea(height: number[]): number {
   }
   return 0;
 }
+
+function maxOperations(nums: number[], k: number): number {
+  let leftPointer: number = 0;
+  let rightPointer: number = nums.length - 1;
+  let operations: number = 0;
+  nums = nums.sort((a, b) => a - b);
+  while (leftPointer < rightPointer) {
+    const getSum = nums[leftPointer] + nums[rightPointer];
+    if (getSum === k) {
+      operations += 1;
+      leftPointer += 1;
+      rightPointer -= 1;
+    } else if (getSum > k) {
+      rightPointer -= 1;
+    } else {
+      leftPointer += 1;
+    }
+  }
+  return operations;
+}
+
+// console.log(maxOperations([1, 2, 3, 4], 5));
