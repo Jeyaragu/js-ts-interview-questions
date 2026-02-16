@@ -628,3 +628,10 @@ function sumRange(arr, left, right) {
   // else find the difference between right value and left index - 1
   return left === 0 ? arr[right] : sumArr[right] - sumArr[left - 1];
 }
+
+// const n = 43261596;
+// const binaryString = n.toString(2);
+// // const binaryString1 =  (decimalNumber >>> 0).toString(2);
+// const binaryStr = binaryString.padStart(32, "0");
+// const binaryRevStr = binaryStr.split("").reverse().join("");
+// console.log(parseInt(binaryRevStr, 2));

@@ -1,3 +1,4 @@
+//283. Move Zeroes
 function moveZeroes(nums: number[]) {
   let slowPointer = 0;
   for (let fastPointer = 0; fastPointer < nums.length; fastPointer++) {
@@ -12,8 +13,7 @@ function moveZeroes(nums: number[]) {
   return nums;
 }
 
-// console.log(moveZeroes([0, 1, 0, 3, 12]));
-
+// 392. Is Subsequence
 function isSubsequence(s: string, t: string): boolean {
   let s_pointer = 0;
   let t_pointer = 0;
@@ -25,27 +25,41 @@ function isSubsequence(s: string, t: string): boolean {
   }
   return s_pointer === s.length;
 }
-// console.log(isSubsequence('acb', 'ahbgdc'));
-// console.log(isSubsequence('aaaaaa', 'bbaaaa'));
-// console.log(isSubsequence('abc', 'ahbgdc'));
+
+// 11. Container With Most Water
+
+// Need to find the area
+// Width = distance between them = j - i
+// Height = minimum of the two height
+// (Because water spills over the shorter line)
+// Area (Water stored) =
+// min(height[i], height[j]) × (j - i)
 
 function maxArea(height: number[]): number {
   let leftPointer = 0;
   let rightPointer = height.length - 1;
-  let preValu = height[0];
+  let maxWater: number = 0;
   while (leftPointer < rightPointer) {
+    const findDistance = rightPointer - leftPointer;
+    let minHeight = 0;
     if (height[leftPointer] === height[rightPointer]) {
+      minHeight = height[leftPointer];
       leftPointer += 1;
       rightPointer -= 1;
     } else if (height[leftPointer] > height[rightPointer]) {
+      minHeight = height[rightPointer];
       rightPointer -= 1;
     } else {
+      minHeight = height[leftPointer];
       leftPointer += 1;
     }
+    const area = minHeight * findDistance;
+    maxWater = Math.max(maxWater, area);
   }
-  return 0;
+  return maxWater;
 }
 
+// 1679. Max Number of K-Sum Pairs
 function maxOperations(nums: number[], k: number): number {
   let leftPointer: number = 0;
   let rightPointer: number = nums.length - 1;
@@ -65,5 +79,3 @@ function maxOperations(nums: number[], k: number): number {
   }
   return operations;
 }
-
-// console.log(maxOperations([1, 2, 3, 4], 5));
