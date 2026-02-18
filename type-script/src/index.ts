@@ -78,14 +78,14 @@ function longestBalanced(nums: number[]): number {
     const findReminder = nums[index] % 2;
     // Finding odd and even numbers
     if (findReminder === 0) {
-      oddNumbers.add(nums[index])
+      oddNumbers.add(nums[index]);
     } else {
-      evenNumbers.add(nums[index])
+      evenNumbers.add(nums[index]);
     }
     index += 1;
   }
-  console.log(oddNumbers, evenNumbers)
-  return 0
+  console.log(oddNumbers, evenNumbers);
+  return 0;
 }
 
 // console.log(longestBalanced([6,2]));

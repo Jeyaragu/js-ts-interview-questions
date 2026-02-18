@@ -79,3 +79,20 @@ function maxOperations(nums: number[], k: number): number {
   }
   return operations;
 }
+
+// 693. Binary Number with Alternating Bits
+// It uses slow pointer technique
+function hasAlternatingBits(n: number): boolean {
+  const converBinary: string = n.toString(2);
+  let slowPointer: number = 0;
+  let hasALternate: boolean = true;
+  for (let fastPointer = 1; fastPointer < converBinary.length; fastPointer++) {
+    if (converBinary[slowPointer] === converBinary[fastPointer]) {
+      hasALternate = false;
+      break;
+    } else {
+      slowPointer += 1;
+    }
+  }
+  return hasALternate;
+}
