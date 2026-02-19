@@ -614,21 +614,6 @@ function anagram(s) {
 console.log(anagram("hhpddlnnsjfoyxpciioigvjqzfbpllssuj"));
 // console.log(anagram("xaxbbbxx"));
 
-// Prefix Sum Example
-function sumRange(arr, left, right) {
-  const sumArr = [];
-  let prevSum = 0;
-  for (let i = 0; i < arr.length; i++) {
-    // Finding sum with current value and previous value
-    prevSum += arr[i];
-    // Creating new Array with sum
-    sumArr.push(prevSum);
-  }
-  // If left point is zero we can return directly value of righ index
-  // else find the difference between right value and left index - 1
-  return left === 0 ? arr[right] : sumArr[right] - sumArr[left - 1];
-}
-
 // const n = 43261596;
 // const binaryString = n.toString(2);
 // // const binaryString1 =  (decimalNumber >>> 0).toString(2);

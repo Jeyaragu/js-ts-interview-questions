@@ -1,3 +1,18 @@
+// Prefix Sum Example
+function sumRange(arr: number[], left: number, right: number) {
+  const sumArr = [];
+  let prevSum = 0;
+  for (let i = 0; i < arr.length; i++) {
+    // Finding sum with current value and previous value
+    prevSum += arr[i];
+    // Creating new Array with sum
+    sumArr.push(prevSum);
+  }
+  // If left point is zero we can return directly value of righ index
+  // else find the difference between right value and left index - 1
+  return left === 0 ? arr[right] : sumArr[right] - sumArr[left - 1];
+}
+
 // 1732. Find the Highest Altitude
 function largestAltitude(gain: number[]): number {
   const cumSum = new Array(gain.length + 1);
@@ -67,12 +82,47 @@ function subarraySum(nums: number[], k: number): number {
 
 // 1588. Sum of All Odd Length Subarrays
 function sumOddLengthSubarrays(arr: number[]) {
-  const prefixSum = new Array(arr.length);
-  let existingSum: number = 0;
+  // const prefixSum = new Array(arr.length);
+  // let existingSum: number = 0;
+  // for (let i = 0; i < arr.length; i++) {
+  //   prefixSum[i] = existingSum + arr[i];
+  //   existingSum += arr[i];
+  // }
+  // return prefixSum;
+  let sumOfOddSubArrays: number = 0;
   for (let i = 0; i < arr.length; i++) {
-    prefixSum[i] = existingSum + arr[i];
-    existingSum += arr[i];
   }
-  return prefixSum;
-};
-console.log(sumOddLengthSubarrays([1,4,2,5,3]))
+  return sumOfOddSubArrays;
+}
+// console.log(sumOddLengthSubarrays([1, 4, 2, 5, 3]));
+// console.log(sumOddLengthSubarrays([10, 11, 12]));
+
+
+// function sumOddLengthSubarrays(arr: number[]) {
+//   const prefixSum = new Array(arr.length);
+//   let existingSum: number = 0;
+//   for (let i = 0; i < arr.length; i++) {
+//     prefixSum[i] = existingSum + arr[i];
+//     existingSum += arr[i];
+//   }
+//   // return prefixSum;
+//   const lastOddIndice: number =
+//     arr.length % 2 === 0 ? arr.length : arr.length - 1;
+//   let sumOfOddSubArrays: number = 0;
+//   let startOddIndex: number = 0;
+//   let subArrSum: number = 0;
+//   for (let i = 0; i < prefixSum.length; i++) {
+//     // sumOfOddSubArrays += arr[i];
+//     let cummulativeSum = 0;
+//     for (let j = i; j < prefixSum.length; j++) {
+//       // const subArr = arr[j + 2] ? arr[j] + arr[j + 1] + arr[j + 2] : 0;
+//       console.log('----', i, j, prefixSum[j], lastOddIndice);
+//       if (j <= lastOddIndice) {
+//         cummulativeSum += prefixSum[j];
+//       }
+//     }
+//     // console.log(i, cummulativeSum);
+//     // console.log(i, arr[i]);
+//   }
+//   return sumOfOddSubArrays;
+// }

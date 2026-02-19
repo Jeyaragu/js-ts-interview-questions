@@ -96,3 +96,21 @@ function hasAlternatingBits(n: number): boolean {
   }
   return hasALternate;
 }
+
+function countBinarySubstrings(s: string): number {
+  let slowPointer: number = 0;
+  let binarySubString = 0;
+  for (let fastPointer = 1; fastPointer < s.length; fastPointer++) {
+    if (s[slowPointer] === s[fastPointer]) {
+      console.log("-Slow", s[slowPointer], s[fastPointer])
+      slowPointer += 1;
+    } else {
+      console.log('-Binary', s[slowPointer], s[fastPointer])
+      binarySubString += 1;
+    }
+    console.log(binarySubString)
+  }
+  return binarySubString;
+}
+
+console.log(countBinarySubstrings('00110011'));
