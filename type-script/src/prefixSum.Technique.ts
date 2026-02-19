@@ -1,3 +1,16 @@
+// 1732. Find the Highest Altitude
+function largestAltitude(gain: number[]): number {
+  const cumSum = new Array(gain.length + 1);
+  cumSum[0] = 0;
+  let currentSum: number = 0;
+  for (let i = 0; i < gain.length; i++) {
+    const findIndicesSum = gain[i] + currentSum;
+    cumSum[i + 1] = findIndicesSum;
+    currentSum = findIndicesSum;
+  }
+  return Math.max.apply(null, cumSum);
+}
+
 // function pivotIndex(nums: number[]) {
 //   let leftSum: number = 0;
 //   for (let p: number = 0; p < nums.length; p++) {
@@ -10,6 +23,7 @@
 //   }
 //   return -1;
 // }
+
 // 724. Find Pivot Index
 function pivotIndex(nums: number[]): number {
   const totalSum = nums.reduce((a, b) => a + b, 0);
@@ -30,6 +44,7 @@ function pivotIndex(nums: number[]): number {
 // console.log(pivotIndex([2, 1, -1]));
 
 // 303. Range Sum Query - Immutable
+
 // 560. Subarray Sum Equals K
 function subarraySum(nums: number[], k: number): number {
   let prevSum = 0;
@@ -48,4 +63,16 @@ function subarraySum(nums: number[], k: number): number {
 }
 // console.log(subarraySum([1, 1, 1], 2));
 // console.log(subarraySum([1, 2, 3], 3));
-console.log(subarraySum([1, 2, 1, 2, 1], 3));
+// console.log(subarraySum([1, 2, 1, 2, 1], 3));
+
+// 1588. Sum of All Odd Length Subarrays
+function sumOddLengthSubarrays(arr: number[]) {
+  const prefixSum = new Array(arr.length);
+  let existingSum: number = 0;
+  for (let i = 0; i < arr.length; i++) {
+    prefixSum[i] = existingSum + arr[i];
+    existingSum += arr[i];
+  }
+  return prefixSum;
+};
+console.log(sumOddLengthSubarrays([1,4,2,5,3]))
