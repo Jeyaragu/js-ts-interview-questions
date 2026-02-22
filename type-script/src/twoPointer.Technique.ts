@@ -113,4 +113,4 @@ function countBinarySubstrings(s: string): number {
   return binarySubString;
 }
 
-console.log(countBinarySubstrings('00110011'));
+// console.log(countBinarySubstrings('00110011'));

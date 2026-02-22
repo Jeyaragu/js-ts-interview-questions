@@ -31,3 +31,69 @@ export function doSomeStuff(
   return;
 }
 // TODO: more examples
+
+type Counter = {
+  increment: () => number;
+  decrement: () => number;
+  reset: () => number;
+};
+
+function createCounter(init: number): Counter {
+  let value = init;
+  return {
+    increment: (): number => {
+      value = value + 1;
+      return value;
+    },
+    decrement: (): number => {
+      value = value - 1;
+      return value;
+    },
+    reset: (): number => {
+      value = init;
+      return value;
+    },
+  };
+}
+/**
+ * const counter = createCounter(5)
+ * counter.increment(); // 6
+ * counter.reset(); // 5
+ * counter.decrement(); // 4
+ */
+
+/**
+ * const counter = createCounter(5)
+ * counter.increment(); // 6
+ * counter.reset(); // 5
+ * counter.decrement(); // 4
+ */
+
+type ToBeOrNotToBe = {
+  toBe: (val: any) => boolean;
+  notToBe: (val: any) => boolean;
+};
+
+function expect(val: any): ToBeOrNotToBe {
+  return {
+    toBe: (otherVal: any): boolean => {
+      if (val === otherVal) {
+        return true;
+      } else {
+        throw new Error('Not Equal');
+      }
+    },
+    notToBe: (otherVal: any): boolean => {
+      if (val !== otherVal) {
+        return true;
+      } else {
+        throw new Error('Equal');
+      }
+    },
+  };
+}
+
+/**
+ * expect(5).toBe(5); // true
+ * expect(5).notToBe(5); // throws "Equal"
+ */

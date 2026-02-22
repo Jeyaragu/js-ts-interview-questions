@@ -81,48 +81,50 @@ function subarraySum(nums: number[], k: number): number {
 // console.log(subarraySum([1, 2, 1, 2, 1], 3));
 
 // 1588. Sum of All Odd Length Subarrays
+// combinatorial counting - Technique used solve this problem by O(n)
 function sumOddLengthSubarrays(arr: number[]) {
-  // const prefixSum = new Array(arr.length);
-  // let existingSum: number = 0;
-  // for (let i = 0; i < arr.length; i++) {
-  //   prefixSum[i] = existingSum + arr[i];
-  //   existingSum += arr[i];
-  // }
-  // return prefixSum;
+  const recur = (arr: number[], startIndex: number, maxLength: number): number => {
+    let subArrSum: number = 0;
+    for (let s = startIndex; s <= startIndex + maxLength; s++) {
+      subArrSum += arr[s];
+    }
+    return subArrSum;
+  };
+
   let sumOfOddSubArrays: number = 0;
-  for (let i = 0; i < arr.length; i++) {
+  for (let i: number = 0; i < arr.length; i++) {
+    sumOfOddSubArrays += arr[i];
+    // Sub should be odd length like 1,3,5,7,...
+    let oddNoIncrement = 2;
+    while (oddNoIncrement < arr.length) {
+      if (arr[i + oddNoIncrement]) {
+        let getSubArrSum = recur(arr, i, oddNoIncrement);
+        sumOfOddSubArrays += getSubArrSum;
+      }
+      oddNoIncrement += 2;
+    }
   }
   return sumOfOddSubArrays;
 }
+
+// combinatorial counting - Technique used solve this problem by O(n)
+// function sumOddLengthSubarrays(arr: number[]): number {
+//   let total = 0;
+//   const n = arr.length;
+
+//   for (let i = 0; i < n; i++) {
+//     const left = i + 1;
+//     const right = n - i;
+//     const totalSubarrays = left * right;
+//     const oddSubarrays = Math.ceil(totalSubarrays / 2);
+
+//     total += arr[i] * oddSubarrays;
+//   }
+
+//   return total;
+// }
 // console.log(sumOddLengthSubarrays([1, 4, 2, 5, 3]));
 // console.log(sumOddLengthSubarrays([10, 11, 12]));
-
-
-// function sumOddLengthSubarrays(arr: number[]) {
-//   const prefixSum = new Array(arr.length);
-//   let existingSum: number = 0;
-//   for (let i = 0; i < arr.length; i++) {
-//     prefixSum[i] = existingSum + arr[i];
-//     existingSum += arr[i];
-//   }
-//   // return prefixSum;
-//   const lastOddIndice: number =
-//     arr.length % 2 === 0 ? arr.length : arr.length - 1;
-//   let sumOfOddSubArrays: number = 0;
-//   let startOddIndex: number = 0;
-//   let subArrSum: number = 0;
-//   for (let i = 0; i < prefixSum.length; i++) {
-//     // sumOfOddSubArrays += arr[i];
-//     let cummulativeSum = 0;
-//     for (let j = i; j < prefixSum.length; j++) {
-//       // const subArr = arr[j + 2] ? arr[j] + arr[j + 1] + arr[j + 2] : 0;
-//       console.log('----', i, j, prefixSum[j], lastOddIndice);
-//       if (j <= lastOddIndice) {
-//         cummulativeSum += prefixSum[j];
-//       }
-//     }
-//     // console.log(i, cummulativeSum);
-//     // console.log(i, arr[i]);
-//   }
-//   return sumOfOddSubArrays;
-// }
+// console.log(sumOddLengthSubarrays([1,2]));
+// console.log(sumOddLengthSubarrays([1]));
+// console.log(sumOddLengthSubarrays([6, 9, 14, 5, 3, 8, 7, 12, 13, 1]));

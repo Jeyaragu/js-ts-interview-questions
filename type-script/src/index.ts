@@ -89,3 +89,23 @@ function longestBalanced(nums: number[]): number {
 }
 
 // console.log(longestBalanced([6,2]));
+
+//  Leetcode: 762. Prime Number of Set Bits in Binary Representation -- Use Binary tree
+function countPrimeSetBits(left: number, right: number): number {
+  let noOfPrimeNumbers: number = 0;
+  for (let i: number = left; i <= right; i++) {
+    const convertBinaryStr = i.toString(2);
+    let countOne: number = 0;
+    for (const bin of convertBinaryStr) {
+      bin === '1' ? (countOne += 1) : '';
+    }
+    console.log(i, convertBinaryStr, countOne);
+    if (countOne % 2 === 0) {
+      noOfPrimeNumbers += 1;
+    }
+    countOne = 0;
+  }
+  console.log(noOfPrimeNumbers);
+  return 28;
+}
+// console.log(countPrimeSetBits(6, 10));
